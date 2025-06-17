@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mode Furtif</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0e0e0e">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #0e0e0e;
+      color: #ff3c3c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      padding: 20px;
+    }
+    h1 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #ff3c3c;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .alert {
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      margin-bottom: 10px;
+      border: 1px solid #ff3c3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>🕵️‍♂️ Mode Furtif Activé</h1>
+  <button onclick="activerModeFurtif()">Activer le Mode Furtif</button>
+
+  <div id="alerts"></div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker enregistré'))
+        .catch(err => console.error('Erreur SW:', err));
+    }
+
+    function activerModeFurtif() {
+      const alerts = [];
+
+      if (navigator.geolocation) {
+        alerts.push("📍 GPS peut être activé. Va dans les paramètres et désactive la localisation.");
+      } else {
+        alerts.push("✅ GPS non accessible depuis le navigateur.");
+      }
+
+      alerts.push("📶 Vérifie si une carte SIM est insérée. Retire-la pour être invisible aux réseaux.");
+      alerts.push("✈️ Active le mode avion manuellement pour couper le réseau GSM.");
+
+      if (navigator.onLine) {
+        alerts.push("📡 Tu es connecté à un réseau. Désactive le Wi-Fi si besoin.");
+      } else {
+        alerts.push("✅ Pas de connexion réseau détectée. Tu es en mode furtif.");
+      }
+
+      alerts.push("🛡️ Utilise un VPN fiable (ProtonVPN, Mullvad, etc.)");
+      alerts.push("🧠 N'utilise pas ton vrai numéro sur WhatsApp, Insta, etc.");
+      alerts.push("👻 Ne te connecte pas à un compte Google ou Apple.");
+
+      let alertsDiv = document.getElementById("alerts");
+      alertsDiv.innerHTML = "";
+      alerts.forEach(msg => {
+        let div = document.createElement("div");
+        div.className = "alert";
+        div.textContent = msg;
+        alertsDiv.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
