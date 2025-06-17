@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.png" />
+  <meta name="theme-color" content="#ff0000" />
+  <title>Mode Furtif</title>
+</head>
+<body>
+  <h1>Bienvenue dans le Mode Furtif 🕶️</h1>
+  <p>Ton site est prêt, discret et installable !</p>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log("Service Worker enregistré ✅"))
+        .catch(err => console.error("Erreur SW:", err));
+    }
+  </script>
+</body>
+</html>

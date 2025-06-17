@@ -1,0 +1,13 @@
+{
+  "name": "Mode Furtif",
+  "short_name": "Furtif",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff0000",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }]
+}
